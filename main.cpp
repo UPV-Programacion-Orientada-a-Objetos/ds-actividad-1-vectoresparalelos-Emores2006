@@ -90,8 +90,7 @@ void ingresar_datos(){
     int agregados = 0;
     while (std::getline(archivo, linea)) {
         if (contador >= s) {
-            std::cout << "⚠️ Se alcanzó el máximo de " << s
-                      << " atletas. El resto no se cargará.\n";
+            std::cout << "⚠️ Se alcanzó el máximo de " << s<< " atletas. El resto no se cargará.\n";
             break;
         }
         if (linea.empty()) continue;
@@ -127,8 +126,7 @@ void ingresar_datos(){
     }
 
     archivo.close();
-    std::cout << "Carga completada. Atletas agregados: " << agregados
-              << ". Total almacenados: " << contador << "/" << s << ".\n";
+    std::cout << "Carga completada. Atletas agregados: " << agregados<< ". Total almacenados: " << contador << "/" << s << ".\n";
 
 }
 
