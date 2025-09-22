@@ -40,6 +40,7 @@ int main() {
         {
         case '1':
             std::cout<<"\n Agregar nuevo atleta"<<std::endl;
+            agregar();
 
             break;
         
@@ -78,10 +79,9 @@ void ingresar_datos(){
     }
 
     std::string linea;
-    // Saltar encabezado si existe
+    
     if (std::getline(archivo, linea)) {
         if (linea.find("nombre") == std::string::npos || linea.find(',') == std::string::npos) {
-            // No era encabezado → volver al inicio
             archivo.clear();
             archivo.seekg(0);
         }
@@ -90,7 +90,7 @@ void ingresar_datos(){
     int agregados = 0;
     while (std::getline(archivo, linea)) {
         if (contador >= s) {
-            std::cout << "⚠️ Se alcanzó el máximo de " << s<< " atletas. El resto no se cargará.\n";
+            std::cout << "Se alcanzó el máximo de " << s << " atletas. El resto no se cargará.\n";
             break;
         }
         if (linea.empty()) continue;
@@ -131,6 +131,62 @@ void ingresar_datos(){
 }
 
 void agregar(){
+
+    std::string disciplinas_validas[] = {
+    "Atletismo", "Natacion", "Gimnasia", "Judo", "Taekwondo",
+    "Boxeo", "Ciclismo", "Esgrima", "Futbol", "Halterofilia",
+    "Remo", "Tenis", "Tiro", "Lucha", "Baloncesto"};
+
+    std::string nombre;
+    std::string pais;
+    std::string disciplina;
+    std::string genero;
+    int oros;
+    bool validad=false;
+    bool validg=false;
+
+    std::cout<<"Ingrese el nombre completo de el Atleta a agregar"<<std::endl;
+    std::cin.ignore();
+    std::getline(std::cin, nombre);
+
+    std::cout<<"Ingrese EL pais de origen del Atleta"<<std::endl;
+    std::getline(std::cin, pais); 
+
+    while(!validad){
+        std::cout<<"Ingrese la disciplina del atleta"<<std::endl;
+        std::cin>>disciplina;
+
+        for (int i = 0; i <15; i++)
+        {
+            if (disciplina == disciplinas_validas[i]) {
+                validad = true;
+                break;
+            }
+        }
+        if (!validad) {
+            std::cout << "Disciplina no valida: " << disciplina<< ". Intente de nuevo (ejemplos: Atletismo, Natacion, Judo...)"<<std::endl;
+        }
+    }
+
+    while (!validg){
+        std::cout<<"Ingrese el genero de el/la atleta (M para masculino y F para fememino)"<<std::endl;
+        std::cin>>genero;
+        if (genero=="M" || genero=="F")
+        {
+            std::cout<<"Genero valido"<<std::endl;
+            validg=true;
+        }
+        else{
+            std::cout<<"GGenero invalido. Debe ser M o F."<<std::endl;
+        }
+    }
+
+    std::cout<<"Ingrese el numero de medallas de oro con las que cuenta"<<std::endl;
+    std::cin>>oros;
+
+
+    std::cout<<nombre<<" "<<pais<<" "<<disciplina<<" "<<genero<<" "<<oros<<std::endl;
+
 
 }
 
