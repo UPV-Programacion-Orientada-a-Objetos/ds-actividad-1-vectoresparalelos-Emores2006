@@ -56,6 +56,7 @@ int main() {
 
         case '4':
             std::cout<<"\n Encontrar el atleta con mas medallas de oro"<<std::endl;
+            masoro();
 
             break;
 
@@ -264,4 +265,34 @@ void totaloro(){
 
 void masoro(){
 
+    int pos = 0;
+
+    std::cout<<"Buscando el atleta con mas medallas de oro...."<<std::endl;
+
+    for (int i = 1; i < s; i++)
+    {
+        if (oro[i]>oro[pos]){
+            pos=i;
+        }
+    }
+
+    int mayor = oro[pos];
+    
+    for (int i = 0; i < s; i++)
+    {
+        if (mayor==oro[i]){
+            std::cout<<"Datos del Atleta con mas medallas de oro"<<std::endl;
+            std::cout<<"Nombre: "<< nombre[i]<<std::endl;
+            std::cout<<"Pais: "<< pais[i]<<std::endl;
+            std::cout<<"Discipline: "<< disciplina[i]<<std::endl;
+            std::cout<<"Genero: "<< genero[i]<<std::endl;
+            std::cout<<"Cantidad de medallas de oro: "<< oro[i]<<std::endl;
+            std::cout<<" "<<std::endl;
+        }
+    }
+    
+    main();
+
+
+    
 }
