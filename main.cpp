@@ -9,6 +9,7 @@ void agregar();
 void informacion();
 void totaloro();
 void masoro();
+bool guardar_datos(const std::string ruta, const std::string nombre, const std::string pais, const std::string disciplina, const std::string genero, int oros);
 
 const int s= 100;
 std::string nombre[s];
@@ -22,8 +23,6 @@ int main() {
     bool res=true;
     char opc;
 
-    //inicialiar los vectores en 100 y si el archivo exede el numero de 100 ponerle el arcivo exede la cantidad de personas que puede haber en el archivo
-    //hacer validaciones de generos, disciplinas, 
     ingresar_datos();
 
     while (true)
@@ -46,7 +45,7 @@ int main() {
         
         case '2':
             std::cout<<"\n Buscar informacion de un atleta"<<std::endl;
-
+            informacion();
             break;
 
         case '3':
@@ -177,7 +176,7 @@ void agregar(){
             validg=true;
         }
         else{
-            std::cout<<"GGenero invalido. Debe ser M o F."<<std::endl;
+            std::cout<<"Genero invalido. Debe ser M o F."<<std::endl;
         }
     }
 
@@ -185,13 +184,57 @@ void agregar(){
     std::cin>>oros;
 
 
-    std::cout<<nombre<<" "<<pais<<" "<<disciplina<<" "<<genero<<" "<<oros<<std::endl;
+    if (guardar_datos("data/data1.csv", nombre, pais, disciplina, genero, oros)) {
+    std::cout << "Atleta guardado \n" <<std::endl;
+    }   
+    else {
+    std::cout << "Atleta no guadrado vuelva a intentarlo \n"<< std::endl;
+    }
 
+    main();
+}
 
+bool guardar_datos(const std::string ruta, const std::string nombre, const std::string pais, const std::string disciplina, const std::string genero, int oros){
+
+    std::ofstream out(ruta, std::ios::app);
+    if (!out.is_open()) {
+    
+        return false;
+    }
+
+    out << nombre << ","<< pais << ","<< disciplina << ","<< genero << ","<< oros << "\n";
+    return true;
 }
 
 void informacion(){
 
+    std:: string nombre1;
+    std::cout<<"Ingrese el nombre del atleta del que desea conocer sus datos"<<std::endl;
+    std::cin.ignore();
+    std::getline(std::cin, nombre1);
+
+    for (int i = 0; i < s; i++){
+
+
+        if (nombre1==nombre[i])
+        {
+            std::cout<<"Datos del Atleta"<<std::endl;
+            std::cout<<"Nombre: "<< nombre[i]<<std::endl;
+            std::cout<<"Pais: "<< pais[i]<<std::endl;
+            std::cout<<"Discipline: "<< disciplina[i]<<std::endl;
+            std::cout<<"Genero: "<< genero[i]<<std::endl;
+            std::cout<<"Cantidad de medallas de oro: "<< oro[i]<<std::endl;
+            std::cout<<" "<<std::endl;
+
+            main();
+        }
+        
+    }
+    std::cout<<"No esta registrado el atleta "<< nombre1<<" en el archivo"<<std::endl;
+    std::cout<<" "<<std::endl;
+            
+    main();
+    
 }
 
 void totaloro(){
