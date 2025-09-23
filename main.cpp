@@ -50,6 +50,7 @@ int main() {
 
         case '3':
             std::cout<<"\n Calcular el total de medallas de oro de un pais."<<std::endl;
+            totaloro();
 
             break;
 
@@ -239,6 +240,26 @@ void informacion(){
 
 void totaloro(){
 
+    std::string pais1;
+    int cantidad = 0;
+
+    std::cout<<"Ingrese el nombre del pais del que busca conocer el total de medallas de oro con las que cuenta"<<std::endl;
+    std::cin.ignore();
+    std::getline(std::cin, pais1);
+    for (int i = 0; i < s; i++)
+    {
+        if (pais1==pais[i]){
+            cantidad += oro[i];
+        }
+    }
+    if(cantidad==0){
+        std::cout<<"No existe el pais en el documento"<<std::endl;
+        std::cout<<" "<<std::endl;
+        main();
+    }
+
+    std::cout<<"El total de medallas de oro de " << pais1<< " es: "<<cantidad<<std::endl;
+    main();
 }
 
 void masoro(){
